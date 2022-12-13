@@ -16,5 +16,24 @@
   
   
   
+  <entry>
+    <title>vue-count-to原理分析</title>
+    <link href="/2022/10/09/vuecounttoanalyze/"/>
+    <url>/2022/10/09/vuecounttoanalyze/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vue-count-to组件解析"><a href="#vue-count-to组件解析" class="headerlink" title="vue-count-to组件解析"></a>vue-count-to组件解析</h1><blockquote><p><a href="https://github.com/PanJiaChen/vue-countTo">vue-count-to</a> is a vue component that will count to a target number at a specified duration</p></blockquote><h2 id="组件使用"><a href="#组件使用" class="headerlink" title="组件使用"></a>组件使用</h2><p>组件接收参数</p><table><thead><tr><th align="center">名称</th><th align="center">作用</th></tr></thead><tbody><tr><td align="center">startVal</td><td align="center">开始数值</td></tr><tr><td align="center">endVal</td><td align="center">结束数值</td></tr><tr><td align="center">duration</td><td align="center">时间</td></tr><tr><td align="center">autoplay</td><td align="center">是否自动开始计数</td></tr><tr><td align="center">separator</td><td align="center">分割符</td></tr><tr><td align="center">prefix</td><td align="center">数值前缀</td></tr><tr><td align="center">suffix</td><td align="center">数值后缀</td></tr><tr><td align="center">useEasing</td><td align="center">是否使用缓动动画</td></tr><tr><td align="center">easingFn</td><td align="center">自定义缓动动画</td></tr><tr><td align="center">decimals</td><td align="center">保留小数位</td></tr><tr><td align="center">decimal</td><td align="center">小数位数值（当前小数位加上decimal）</td></tr></tbody></table><p>组件向外抛出了两个事件分别是<code>mountedCallback</code>和<code>callback</code>，它们分别在组件挂载完成和计算完成时触发。组件还提供了<code>start</code>、<code>pause</code>、<code>resume</code>、<code>reset</code>方法来控制计数器的开始、暂停、恢复、重置这些动作。</p><h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>组件中的计时动作在<code>主要count</code>方法中实现。计时器的动画使用<code>requestAnimationFrame</code>（如果浏览器不支持降级使用<code>setTimeout</code>）来实现，<code>requestAnimationFrame</code>会接收<code>count</code>方法作为回调函数，在这个回调函数中会记录当前计数器执行的剩余时间和已经过时间，然后通过缓动动画函数来计算目前的计时器的值，如果<code>useEasing</code>参数为<code>false</code>那么计数器将会通过已经经过的时间和动画时间比值来计算。</p><p>组件默认缓动动画函数为：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * t：动画开始以来经过的时间</span><br><span class="hljs-comment"> * b：动画的起点值</span><br><span class="hljs-comment"> * c：动画的终点值</span><br><span class="hljs-comment"> * d：完成动画需要的时间</span><br><span class="hljs-comment"> */</span><br><span class="hljs-title function_">default</span>(<span class="hljs-params">t, b, c, d</span>) &#123;<br>    <span class="hljs-keyword">return</span> c * (-<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(<span class="hljs-number">2</span>, -<span class="hljs-number">10</span> * t / d) + <span class="hljs-number">1</span>) * <span class="hljs-number">1024</span> / <span class="hljs-number">1023</span> + b;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>

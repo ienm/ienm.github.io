@@ -18,8 +18,8 @@
   
     <meta name="description" content="Mio&#39;s fans">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mio">
-<meta property="og:url" content="https://ienm.github.io/index.html">
+<meta property="og:title" content="标签 - vue">
+<meta property="og:url" content="https://ienm.github.io/tags/vue/index.html">
 <meta property="og:site_name" content="Mio">
 <meta property="og:description" content="Mio&#39;s fans">
 <meta property="og:locale" content="zh_CN">
@@ -28,7 +28,7 @@
   
   
   
-  <title>Mio</title>
+  <title>标签 - vue - Mio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -82,7 +82,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 100vh;">
+<div class="header-inner" style="height: 80vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -181,13 +181,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/yaoyeluying.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="想要去露营"></span>
+            <span id="subtitle" data-typed-text="标签 - vue"></span>
           
         </div>
 
@@ -211,92 +211,28 @@
     
       <div class="container nopadding-x-md">
         <div id="board"
-          style="margin-top: 0">
+          >
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-
-  <div class="row mx-auto index-card">
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
     
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/08/hello-world/" target="_self">
-          Hello World
-        </a>
-      </h1>
-
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/08/hello-world/" target="_self">
-        <div>
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-08 13:50" pubdate>
-              2022-12-08
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
+      <p class="h5">2022</p>
     
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2022/10/09/vuecounttoanalyze/" target="_self">
-          <img src="/img/bg/blhx.webp" srcset="/img/loading.gif" lazyload alt="vue-count-to原理分析">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/10/09/vuecounttoanalyze/" target="_self">
-          vue-count-to原理分析
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/2022/10/09/vuecounttoanalyze/" target="_self">
-        <div>
-          vue-count-to组件解析 vue-count-to is a vue component that will count to a target number at a specified duration  组件使用组件接收参数    名称 作用    startVal 开始数值   endVal 结束数值   duration 时间   autoplay 是否自动开始计数   sepa
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-10-09 16:22" pubdate>
-              2022-10-09
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vue/">#vue</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+    <a href="/2022/10/09/vuecounttoanalyze/" class="list-group-item list-group-item-action">
+      <time>10-09</time>
+      <div class="list-group-item-title">vue-count-to原理分析</div>
+    </a>
+  
+</div>
 
 
 
@@ -386,37 +322,7 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        jQuery.ajax({
-          type: 'GET',
-          url: 'https://v1.hitokoto.cn/',
-          headers: {},
-          dataType: 'json',
-          success: function(result) {
-            var apiText;
-            if (result) {
-              var keys = 'hitokoto'.split(',');
-              if (result instanceof Array) {
-                result = result[0];
-              }
-              for (const k of keys) {
-                var value = result[k];
-                if (typeof value === 'string') {
-                  apiText = value;
-                  break;
-                } else if (value instanceof Object) {
-                  result = value;
-                }
-              }
-            }
-            apiText ? typing(apiText) : typing(text);
-          },
-          error: function(xhr, status, error) {
-            if (error) {
-              console.error('Failed to request https://v1.hitokoto.cn/:', error);
-            }
-            typing(text);
-          }
-        })
+        typing(text);
       
     })(window, document);
   </script>
