@@ -16,21 +16,24 @@
   <meta name="author" content="mio">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="JS测量文本宽度offsetWidth 测量要获取文本宽度首先要将文本在文档中渲染出来，然后去获取文本的offsetWidth。offsetWidth是dom元素的一个只读属性，它由元素的padding，内容宽度，边框宽度，滚动条宽度共同组成，除了使用offsetWidth之外还可以使用scrollWidth，clientWidth去获取文本宽度。 12345678910111213&#x2F;*  获取文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://ienm.github.io/2022/12/08/hello-world/index.html">
+<meta property="og:title" content="JS测量文本宽度">
+<meta property="og:url" content="https://ienm.github.io/2023/07/17/JS%E6%B5%8B%E9%87%8F%E6%96%87%E6%9C%AC%E5%AE%BD%E5%BA%A6/index.html">
 <meta property="og:site_name" content="Mio">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="JS测量文本宽度offsetWidth 测量要获取文本宽度首先要将文本在文档中渲染出来，然后去获取文本的offsetWidth。offsetWidth是dom元素的一个只读属性，它由元素的padding，内容宽度，边框宽度，滚动条宽度共同组成，除了使用offsetWidth之外还可以使用scrollWidth，clientWidth去获取文本宽度。 12345678910111213&#x2F;*  获取文">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-08T05:50:36.459Z">
-<meta property="article:modified_time" content="2022-12-08T05:50:36.459Z">
+<meta property="og:image" content="https://picturetypora.oss-cn-hangzhou.aliyuncs.com/img/yuyi.jpg">
+<meta property="article:published_time" content="2023-07-17T09:05:00.000Z">
+<meta property="article:modified_time" content="2023-07-17T09:06:58.420Z">
 <meta property="article:author" content="mio">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://picturetypora.oss-cn-hangzhou.aliyuncs.com/img/yuyi.jpg">
   
   
   
-  <title>Hello World - Mio</title>
+  <title>JS测量文本宽度 - Mio</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="JS测量文本宽度"></span>
           
         </div>
 
@@ -206,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-08 13:50" pubdate>
-          2022年12月8日 下午
+        <time datetime="2023-07-17 17:05" pubdate>
+          2023年7月17日 下午
         </time>
       </span>
     
@@ -218,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          925 字
         
       </span>
     
@@ -229,7 +232,7 @@
         
         
         
-          4 分钟
+          8 分钟
         
       </span>
     
@@ -267,24 +270,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">JS测量文本宽度</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="JS测量文本宽度"><a href="#JS测量文本宽度" class="headerlink" title="JS测量文本宽度"></a>JS测量文本宽度</h1><h2 id="offsetWidth-测量"><a href="#offsetWidth-测量" class="headerlink" title="offsetWidth 测量"></a>offsetWidth 测量</h2><p>要获取文本宽度首先要将文本在文档中渲染出来，然后去获取文本的<code>offsetWidth</code>。<code>offsetWidth</code>是dom元素的一个只读属性，它由元素的<code>padding</code>，<code>内容宽度</code>，<code>边框宽度</code>，<code>滚动条宽度</code>共同组成，除了使用<code>offsetWidth</code>之外还可以使用<code>scrollWidth</code>，<code>clientWidth</code>去获取文本宽度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/* </span><br><span class="hljs-comment"> 获取文本真实宽度</span><br><span class="hljs-comment"> @param fontStyle 字体样式</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getRealTextWidth</span> = (<span class="hljs-params">text, fontStyle</span>) =&gt; &#123;<br>    <span class="hljs-keyword">const</span> span = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;span&#x27;</span>);<br>    span.<span class="hljs-property">style</span>.<span class="hljs-property">font</span> = fontStyle;<br>    span.<span class="hljs-property">innerText</span> = text;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(span);<br>    <span class="hljs-keyword">const</span> textWidth = span.<span class="hljs-property">offsetWidth</span>;<br>    <span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">removeChild</span>(span);<br>    <span class="hljs-keyword">return</span> textWidth;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+<h2 id="Canvas-测量"><a href="#Canvas-测量" class="headerlink" title="Canvas 测量"></a>Canvas 测量</h2><p>Canvas提供了<code>measureText</code>api来测量文本，它能够返回一个<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/TextMetrics">TextMetrics</a>对象，这个对象包含文本的尺寸信息。使用<code>measureText</code>来测量文本能够得到比<code>offsetWidth</code>更精准的结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getRealTextWidthByCanvas</span> = (<span class="hljs-params">text, fontStyle</span>) =&gt; &#123;<br>    <span class="hljs-keyword">const</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;canvas&#x27;</span>);<br>    <span class="hljs-comment">// 宽高可以设置一个较大的值</span><br>    canvas.<span class="hljs-property">style</span>.<span class="hljs-property">width</span> = <span class="hljs-number">500</span>+<span class="hljs-string">&#x27;px&#x27;</span>;<br>    canvas.<span class="hljs-property">style</span>.<span class="hljs-property">height</span> = <span class="hljs-number">500</span>+<span class="hljs-string">&#x27;px&#x27;</span>;<br>    <span class="hljs-keyword">const</span> ctx = canvas.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&#x27;2d&#x27;</span>);<br>    ctx.<span class="hljs-property">font</span> = fontStyle;<br>    <span class="hljs-keyword">return</span> ctx.<span class="hljs-title function_">measureText</span>(text).<span class="hljs-property">width</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
               </div>
@@ -294,6 +290,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/js/">#js</a>
+      
+    </div>
+  
 </div>
 
 
@@ -302,8 +305,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>https://ienm.github.io/2022/12/08/hello-world/</div>
+      <div>JS测量文本宽度</div>
+      <div>https://ienm.github.io/2023/07/17/JS测量文本宽度/</div>
     </div>
     <div class="license-meta">
       
@@ -315,7 +318,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月8日</div>
+          <div>2023年7月17日</div>
         </div>
       
       
