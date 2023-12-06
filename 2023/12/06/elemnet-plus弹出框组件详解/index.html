@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="mio">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="element-plus弹出框详解element-plus弹出框与vue2版本实现方式发生了改变，虽然它们最后都是使用popper.js来实现但是在element-plus中针对popper.js专门封装了一些组件来实现弹出框功能。element-plus中提供了三个基础组件来供使用到弹出框的组件进行扩展，这三个组件分别是el-popper、el-trigger、el-content，以下将对这些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="element-plus弹出框详解">
+<meta property="og:url" content="https://ienm.github.io/2023/12/06/elemnet-plus%E5%BC%B9%E5%87%BA%E6%A1%86%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Mio">
+<meta property="og:description" content="element-plus弹出框详解element-plus弹出框与vue2版本实现方式发生了改变，虽然它们最后都是使用popper.js来实现但是在element-plus中针对popper.js专门封装了一些组件来实现弹出框功能。element-plus中提供了三个基础组件来供使用到弹出框的组件进行扩展，这三个组件分别是el-popper、el-trigger、el-content，以下将对这些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ienm.github.io/img/bg/laxxx.jpg">
+<meta property="article:published_time" content="2023-12-06T06:10:19.000Z">
+<meta property="article:modified_time" content="2023-12-06T06:13:38.355Z">
+<meta property="article:author" content="mio">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="element-plus">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ienm.github.io/img/bg/laxxx.jpg">
+  
+  
+  
+  <title>element-plus弹出框详解 - Mio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ienm.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mio&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="element-plus弹出框详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-06 14:10" pubdate>
+          2023年12月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">element-plus弹出框详解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="element-plus弹出框详解"><a href="#element-plus弹出框详解" class="headerlink" title="element-plus弹出框详解"></a>element-plus弹出框详解</h1><p><code>element-plus</code>弹出框与<code>vue2</code>版本实现方式发生了改变，虽然它们最后都是使用<em><strong>popper.js</strong></em>来实现但是在<code>element-plus</code>中针对<em><strong>popper.js</strong></em>专门封装了一些组件来实现弹出框功能。<code>element-plus</code>中提供了三个基础组件来供使用到弹出框的组件进行扩展，这三个组件分别是<strong>el-popper</strong>、<strong>el-trigger</strong>、<strong>el-content</strong>，以下将对这些组件进行解析。</p>
+<h2 id="el-popper："><a href="#el-popper：" class="headerlink" title="el-popper："></a>el-popper：</h2><p><code>el-popper</code>作为<code>el-trigger</code>和<code>el-content</code>的父组件来使用，它通过<code>provide</code>向子组件提供了一系列的<code>dom</code> 元素引用，这样做的目的是为了让不同的的子组件也能够访问到这些<code>dom</code>，使得一些子组件比如<code>el-content</code>可以定位触发元素的位置，<code>el-popper</code>还提供了一个<em><strong>props</strong></em> <code>role</code>，属性声明了弹出框如何被使用。</p>
+<p>下面对这些引用进行解释  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// popper.vue</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 触发弹出框的dom元素</span><br><span class="hljs-comment">   */</span><br>  triggerRef,<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * popperjs的实例</span><br><span class="hljs-comment">   */</span><br>  popperInstanceRef,<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 弹出框中内容的dom元素</span><br><span class="hljs-comment">   */</span><br>  contentRef,<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * <span class="hljs-doctag">@description</span> popper reference element</span><br><span class="hljs-comment">   */</span><br>  referenceRef,      <br></code></pre></td></tr></table></figure>
+
+<p>以下是所有角色类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// popper.ts</span><br>roleTypes = [<br>  <span class="hljs-string">&#x27;dialog&#x27;</span>,<br>  <span class="hljs-string">&#x27;grid&#x27;</span>,<br>  <span class="hljs-string">&#x27;group&#x27;</span>,<br>  <span class="hljs-string">&#x27;listbox&#x27;</span>,<br>  <span class="hljs-string">&#x27;menu&#x27;</span>,<br>  <span class="hljs-string">&#x27;navigation&#x27;</span>,<br>  <span class="hljs-string">&#x27;tooltip&#x27;</span>,<br>  <span class="hljs-string">&#x27;tree&#x27;</span>,<br>]<br></code></pre></td></tr></table></figure>
+
+<h2 id="el-trigger："><a href="#el-trigger：" class="headerlink" title="el-trigger："></a>el-trigger：</h2><p><code>el-trigger</code>被用于指定弹出框的元素。el-trigger提供了一个默认的插槽，插槽中的元素即为默认触发弹出框的元素，它还提供了<code>virtualTriggering</code>和<code>virtualRef</code>用来手动指定触发元素。</p>
+<p>以下是<code>virtualTriggering</code>为<code>true</code>时指定触发元素的方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//trigger.vue</span><br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">watch</span>(<br>      <span class="hljs-comment">//监听了virtualRef，如果设定了值则为triggerRef赋值</span><br>    <span class="hljs-function">() =&gt;</span> props.<span class="hljs-property">virtualRef</span>,<br>    <span class="hljs-function">(<span class="hljs-params">virtualEl</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (virtualEl) &#123;<br>        triggerRef.<span class="hljs-property">value</span> = <span class="hljs-title function_">unrefElement</span>(virtualEl <span class="hljs-keyword">as</span> <span class="hljs-title class_">HTMLElement</span>) <span class="hljs-comment">//vueuse unrefElement</span><br>      &#125;<br>    &#125;,<br>    &#123;<br>      <span class="hljs-attr">immediate</span>: <span class="hljs-literal">true</span>,<br>    &#125;<br>  )<br></code></pre></td></tr></table></figure>
+
+<p>默认情况下为triggerRef设定插槽值的操作在<code>el-only-child</code>中完成</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//trigger.vue</span><br><span class="hljs-title function_">useForwardRef</span>(triggerRef)<br><span class="hljs-comment">//</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useForwardRef = &lt;T&gt;<span class="hljs-function">(<span class="hljs-params">forwardRef: Ref&lt;T | <span class="hljs-literal">null</span>&gt;</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">setForwardRef</span> = (<span class="hljs-params">el: T</span>) =&gt; &#123;<br>    forwardRef.<span class="hljs-property">value</span> = el<br>  &#125;<br><br>  <span class="hljs-title function_">provide</span>(<span class="hljs-variable constant_">FORWARD_REF_INJECTION_KEY</span>, &#123;<br>    setForwardRef,<br>  &#125;)<br>&#125;<br><span class="hljs-comment">//el-only-child.vue</span><br><span class="hljs-title function_">setup</span>(<span class="hljs-params">_, &#123; slots, attrs &#125;</span>) &#123;<br>    <span class="hljs-keyword">const</span> forwardRefInjection = <span class="hljs-title function_">inject</span>(<span class="hljs-variable constant_">FORWARD_REF_INJECTION_KEY</span>)<br>    <span class="hljs-comment">//给目标ref设置 默认插槽中的dom</span><br>    <span class="hljs-keyword">const</span> forwardRefDirective = <span class="hljs-title function_">useForwardRefDirective</span>(<br>        forwardRefInjection?.<span class="hljs-property">setForwardRef</span> ?? <span class="hljs-variable constant_">NOOP</span><br>    )<br>    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-keyword">const</span> defaultSlot = slots.<span class="hljs-property">default</span>?.(attrs)<br>        <span class="hljs-keyword">if</span> (!defaultSlot) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br><br>        <span class="hljs-keyword">if</span> (defaultSlot.<span class="hljs-property">length</span> &gt; <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-title function_">debugWarn</span>(<span class="hljs-variable constant_">NAME</span>, <span class="hljs-string">&#x27;requires exact only one valid child.&#x27;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>        &#125;<br><br>        <span class="hljs-keyword">const</span> firstLegitNode = <span class="hljs-title function_">findFirstLegitChild</span>(defaultSlot)<br>        <span class="hljs-keyword">if</span> (!firstLegitNode) &#123;<br>            <span class="hljs-title function_">debugWarn</span>(<span class="hljs-variable constant_">NAME</span>, <span class="hljs-string">&#x27;no valid child node found&#x27;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>        &#125;<br>		<span class="hljs-comment">//注册指令</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-title function_">withDirectives</span>(<span class="hljs-title function_">cloneVNode</span>(firstLegitNode!, attrs), [<br>            [forwardRefDirective],<br>        ])<br>    &#125;<br>&#125;,<br><span class="hljs-comment">//绑定自定义指令</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useForwardRefDirective = (<br>  <span class="hljs-attr">setForwardRef</span>: <span class="hljs-title class_">ForwardRefSetter</span><br>): <span class="hljs-function"><span class="hljs-params">ObjectDirective</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-title function_">mounted</span>(<span class="hljs-params">el</span>) &#123;<br>      <span class="hljs-title function_">setForwardRef</span>(el)<br>    &#125;,<br>    <span class="hljs-title function_">updated</span>(<span class="hljs-params">el</span>) &#123;<br>      <span class="hljs-title function_">setForwardRef</span>(el)<br>    &#125;,<br>    <span class="hljs-title function_">unmounted</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-title function_">setForwardRef</span>(<span class="hljs-literal">null</span>)<br>    &#125;,<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="el-content："><a href="#el-content：" class="headerlink" title="el-content："></a>el-content：</h2><p><code>el-content</code>是实现弹出框的核心组件，它包含一个默认插槽用于插入弹出框的内容，在这个组件中还完成了popperjs实例的初始化，并且这个组件还向<code>el-arrow</code>组件提供了<em>arrowStyle</em>、<em>arrowRef</em>、<em>arrowOffset</em>用来定位弹出框的小三角和自定义小三角的样式。</p>
+<p>在<code>usePopperContent</code>中完成了popperjs需要的选项的初始化并创建了popperjs的实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//use-content.ts</span><br><span class="hljs-keyword">const</span> eventListenerModifier = <span class="hljs-title function_">computed</span>(...)<br><span class="hljs-keyword">const</span> arrowModifier = <span class="hljs-title function_">computed</span>(...)<br><span class="hljs-keyword">const</span> options = computed&lt;<span class="hljs-title class_">PartialOptions</span>&gt;(...)<br><span class="hljs-comment">//找到popper定位的元素</span><br><span class="hljs-keyword">const</span> computedReference = <span class="hljs-title function_">computed</span>(<br>  <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">unwrapMeasurableEl</span>(props.<span class="hljs-property">referenceEl</span>) || <span class="hljs-title function_">unref</span>(triggerRef)<br>)<br><span class="hljs-comment">//在usePopper中完成了实例的创建，并且在这里面还对options进行了监听，如果options发生了改变就给实例设置新的options</span><br><span class="hljs-keyword">const</span> &#123;..., update, ..., instanceRef &#125; =<br>      <span class="hljs-title function_">usePopper</span>(computedReference, contentRef, options)<br><span class="hljs-comment">//把properjs 实例注入到popperInstanceRef中</span><br><span class="hljs-title function_">watch</span>(instanceRef, <span class="hljs-function">(<span class="hljs-params">instance</span>) =&gt;</span> (popperInstanceRef.<span class="hljs-property">value</span> = instance))<br><span class="hljs-comment">//随定位元素位置改变来改变popper位置</span><br><span class="hljs-title function_">onMounted</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">watch</span>(<br>        <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">unref</span>(computedReference)?.<span class="hljs-title function_">getBoundingClientRect</span>(),<br>        <span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-title function_">update</span>()<br>        &#125;<br>    )<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vue/">#vue</a>
+      
+        <a href="/tags/element-plus/">#element-plus</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>element-plus弹出框详解</div>
+      <div>https://ienm.github.io/2023/12/06/elemnet-plus弹出框组件详解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>mio</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/17/JS%E6%B5%8B%E9%87%8F%E6%96%87%E6%9C%AC%E5%AE%BD%E5%BA%A6/" title="JS测量文本宽度">
+                        <span class="hidden-mobile">JS测量文本宽度</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
